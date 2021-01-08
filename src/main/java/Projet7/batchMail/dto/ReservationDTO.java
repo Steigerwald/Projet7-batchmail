@@ -1,11 +1,11 @@
-package Projet7.batchMail;
+package Projet7.batchMail.dto;
 
 import lombok.Data;
+
 import java.util.Date;
 
 @Data
-public class Reservation {
-
+public class ReservationDTO {
     private int idReservation;
     private String etatReservation;
     private Date dateReservation;
@@ -14,6 +14,6 @@ public class Reservation {
     private int delaiDeLocation;
     private Boolean prolongation;
     private Boolean isactif;
-    private User user;
-    private Livre livre;
+    private UserDTO user;
+    private LivreDTO livre;
 }

@@ -1,13 +1,11 @@
-package Projet7.batchMail;
+package Projet7.batchMail.dto;
 
 import lombok.Data;
-import org.springframework.lang.Nullable;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
-public class Livre {
+public class LivreDTO {
 
     private int idLivre;
     private String titre;
@@ -20,5 +18,5 @@ public class Livre {
     private int prixLocation;
     private String etatLivre;
     private Boolean disponibilite;
-    private Bibliotheque bibliotheque;
+    private BibliothequeDTO bibliotheque;
 }

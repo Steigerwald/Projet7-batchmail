@@ -1,6 +1,8 @@
 package Projet7.batchMail;
 
 
+import Projet7.batchMail.dto.ReservationDTO;
+import Projet7.batchMail.dto.UserDTO;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -10,6 +12,7 @@ import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 @Configuration
 @EnableBatchProcessing
@@ -20,16 +23,16 @@ public class SpringBatchConfiguration {
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
     @Autowired
-    private ItemReader<Reservation> reservationItemReader;
+    private ItemReader<ReservationDTO> reservationItemReader;
     @Autowired
-    private ItemWriter<User> userItemWriter;
+    private ItemWriter<UserDTO> userItemWriter;
     @Autowired
-    private ItemProcessor<Reservation,User>itemProcessor;
+    private ItemProcessor<ReservationDTO,UserDTO>itemProcessor;
 
 
     public org.springframework.batch.core.Job mailRelanceJob(){
       Step step1=stepBuilderFactory.get("RecuperationReservation")
-              .<Reservation,User>chunk(4)
+              .<ReservationDTO,UserDTO>chunk(4)
               .reader(reservationItemReader)
               .processor(itemProcessor)
               .writer(userItemWriter)
@@ -38,5 +41,13 @@ public class SpringBatchConfiguration {
               .start(step1)
               .build();
     }
+
+    @Component
+    public class RecupReservationItemReader implements ItemReader<Reservation>{
+
+        public
+
+    }
+
 
 }

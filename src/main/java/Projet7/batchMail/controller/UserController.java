@@ -1,7 +1,7 @@
-package Projet7.batchMail.Controller;
+package Projet7.batchMail.controller;
 
-import Projet7.batchMail.Service.AuthService;
-import Projet7.batchMail.Service.UserService;
+import Projet7.batchMail.service.AuthService;
+import Projet7.batchMail.service.UserService;
 import Projet7.batchMail.dto.UserDTO;
 import Projet7.batchMail.form.LoginForm;
 import org.slf4j.Logger;
@@ -62,10 +62,8 @@ public class UserController {
                 authService.setAuthentification(true);
                 UserDTO newUserDTO=new UserDTO();
                 newUserDTO.setMailUser(utilisateur.getUserName());
-                return "Connection réussie";
+                return "pageReussie";
         }
     }
-
-
 
 }

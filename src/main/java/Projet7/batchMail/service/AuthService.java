@@ -1,4 +1,4 @@
-package Projet7.batchMail.Service;
+package Projet7.batchMail.service;
 
 import Projet7.batchMail.dto.UserDTO;
 import lombok.Data;

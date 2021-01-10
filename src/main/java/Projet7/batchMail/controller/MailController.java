@@ -1,4 +1,4 @@
-package Projet7.batchMail.Controller;
+package Projet7.batchMail.controller;
 
 import org.springframework.stereotype.Controller;
 

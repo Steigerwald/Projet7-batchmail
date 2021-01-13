@@ -7,6 +7,10 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,26 +24,43 @@ public class BatchMailApplication {
 	private JobBuilderFactory jobBuilderFactory;
 	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
+	@Autowired
+	private ItemReader<String> itemReader;
+	@Autowired
+	private ItemProcessor<String,String> itemProcessor;
+	@Autowired
+	private ItemWriter<String> itemWriter;
 
 	@Bean
-	public Step HelloWordStep(){
+	public Step helloWordStep(){
 		return stepBuilderFactory.get("Step1")
 				.tasklet(new HelloWordTaskLet())
 				.build();
 	}
 
 	@Bean
-	public Step CommentStep(){
+	public Step commentStep(){
 		return stepBuilderFactory.get("Step2")
 				.tasklet(new CommentTasklet())
 				.build();
 	}
 
 	@Bean
-	public Job HelloWordJob(){
+	public Step connectingStep(){
+		return stepBuilderFactory.get("Step3")
+				.<String,String>chunk(1)
+				.reader(itemReader)
+				.processor(itemProcessor)
+				.writer(itemWriter)
+				.build();
+	}
+
+	@Bean
+	public Job helloWordJob(){
 		return jobBuilderFactory.get("Job")
-				.start(HelloWordStep())
-				.next(CommentStep())
+				.start(helloWordStep())
+				.next(connectingStep())
+				.next(commentStep())
 				.build();
 	}
 

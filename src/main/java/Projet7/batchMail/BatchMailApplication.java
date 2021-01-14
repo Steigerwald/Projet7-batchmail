@@ -2,6 +2,7 @@ package Projet7.batchMail;
 
 import Projet7.batchMail.batch.CommentTasklet;
 import Projet7.batchMail.batch.HelloWordTaskLet;
+import Projet7.batchMail.batch.LoginTasklet;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -45,6 +46,7 @@ public class BatchMailApplication {
 				.build();
 	}
 
+	/*
 	@Bean
 	public Step connectingStep(){
 		return stepBuilderFactory.get("Step3")
@@ -52,6 +54,13 @@ public class BatchMailApplication {
 				.reader(itemReader)
 				.processor(itemProcessor)
 				.writer(itemWriter)
+				.build();
+	}*/
+
+	@Bean
+	public Step connectingStep(){
+		return stepBuilderFactory.get("Step3")
+				.tasklet(new LoginTasklet())
 				.build();
 	}
 

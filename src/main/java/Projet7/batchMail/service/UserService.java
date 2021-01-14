@@ -18,7 +18,7 @@ public class UserService {
     Logger logger = (Logger) LoggerFactory.getLogger(UserService.class);
 
     /*Methode pour envoyer le login et récupérer le token d'autorisation*/
-    public String getTokenByMailAndMotDePasse(LoginForm utilisateur) throws IOException, InterruptedException {
+    public String getTokenByMailAndMotDePasse(LoginForm utilisateur) throws IOException, InterruptedException,NullPointerException{
         HttpClient client = HttpClient.newHttpClient();
         var objectMapper = new ObjectMapper();
         String requestUtilisateur = objectMapper
@@ -32,7 +32,11 @@ public class UserService {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
         logger.info(" retour du body: "+response.body());
-        return response.body();
+        String reponse ="1";
+        if(response.body() != null) {
+            reponse=response.body();
+        }
+        return reponse;
     }
 
 

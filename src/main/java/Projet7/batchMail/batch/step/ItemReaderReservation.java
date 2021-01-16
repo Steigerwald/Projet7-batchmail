@@ -1,4 +1,4 @@
-package Projet7.batchMail.batch;
+package Projet7.batchMail.batch.step;
 
 import Projet7.batchMail.dto.ReservationDTO;
 import Projet7.batchMail.service.AuthService;

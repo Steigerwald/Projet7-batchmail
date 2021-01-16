@@ -1,6 +1,5 @@
-package Projet7.batchMail.batch;
+package Projet7.batchMail.batch.step;
 
-import Projet7.batchMail.batch.step.helloWordStep;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.ExitStatus;

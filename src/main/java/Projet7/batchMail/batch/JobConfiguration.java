@@ -1,5 +1,8 @@
 package Projet7.batchMail.batch;
 
+import Projet7.batchMail.batch.step.CommentTasklet;
+import Projet7.batchMail.batch.step.HelloWordTaskLet;
+import Projet7.batchMail.batch.step.ItemReaderLogin;
 import Projet7.batchMail.dto.ReservationDTO;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -78,6 +81,7 @@ public class JobConfiguration {
                 .writer(itemWriterReservation)
                 .build();
     }
+
 /*
 	@Bean
 	public Step connectingStep(){

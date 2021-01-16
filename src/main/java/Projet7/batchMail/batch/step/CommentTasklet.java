@@ -1,4 +1,4 @@
-package Projet7.batchMail.batch;
+package Projet7.batchMail.batch.step;
 
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;

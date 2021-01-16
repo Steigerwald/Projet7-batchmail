@@ -1,4 +1,4 @@
-package Projet7.batchMail.batch;
+package Projet7.batchMail.batch.step;
 
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;

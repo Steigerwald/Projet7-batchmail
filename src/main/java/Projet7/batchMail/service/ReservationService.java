@@ -48,12 +48,12 @@ public class ReservationService {
         }
     }
 
-    /*Methode pour obtenir toutes les reservations de la base de données de l'API rest*/
-    public List<ReservationDTO> getAllReservations() throws IOException, InterruptedException {
+    /*Methode pour obtenir toutes les reservations du batch de la base de données de l'API rest*/
+    public List<ReservationDTO> getAllReservationsBatch() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         String token = authService.getMemoireToken();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:9090/reservation/"))
+                .uri(URI.create("http://localhost:9090/reservation/all/batch"))
                 .header("Authorization","Bearer"+" "+token)
                 .GET()
                 .build();

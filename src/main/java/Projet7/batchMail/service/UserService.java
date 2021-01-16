@@ -35,6 +35,8 @@ public class UserService {
         String reponse ="1";
         if(response.body() != null) {
             reponse=response.body();
+        }else {
+            reponse=null;
         }
         return reponse;
     }

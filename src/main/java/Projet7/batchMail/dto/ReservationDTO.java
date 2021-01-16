@@ -14,6 +14,7 @@ public class ReservationDTO {
     private int delaiDeLocation;
     private Boolean prolongation;
     private Boolean isactif;
+    private Boolean relance;
     private UserDTO user;
     private LivreDTO livre;
 }

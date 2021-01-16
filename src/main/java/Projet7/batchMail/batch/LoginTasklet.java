@@ -24,8 +24,9 @@ public class LoginTasklet implements Tasklet {
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception,NullPointerException {
         LoginForm utilisateur = new LoginForm();
         utilisateur.setMotDePasse("coco");
-        utilisateur.setUserName("user@gmail.com");
-        String token = userService.getTokenByMailAndMotDePasse(utilisateur);
+        utilisateur.setUserName("batch@gmail.com");
+        String token = new String();
+        token =(userService.getTokenByMailAndMotDePasse(utilisateur));
         authService.setMemoireToken(token);
         System.out.println(authService.getMemoireToken());
         return RepeatStatus.FINISHED;

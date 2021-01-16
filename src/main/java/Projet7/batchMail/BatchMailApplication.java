@@ -2,6 +2,7 @@ package Projet7.batchMail;
 
 import Projet7.batchMail.batch.CommentTasklet;
 import Projet7.batchMail.batch.HelloWordTaskLet;
+import Projet7.batchMail.batch.ItemReaderLogin;
 import Projet7.batchMail.batch.LoginTasklet;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.io.IOException;
 
 @EnableBatchProcessing
 @SpringBootApplication
@@ -32,6 +35,12 @@ public class BatchMailApplication {
 	@Autowired
 	private ItemWriter<String> itemWriter;
 
+
+	@Bean
+	public ItemReader<String>itemReader() throws IOException, InterruptedException {
+		return new ItemReaderLogin();
+	}
+
 	@Bean
 	public Step helloWordStep(){
 		return stepBuilderFactory.get("Step1")
@@ -46,7 +55,6 @@ public class BatchMailApplication {
 				.build();
 	}
 
-	/*
 	@Bean
 	public Step connectingStep(){
 		return stepBuilderFactory.get("Step3")
@@ -55,14 +63,15 @@ public class BatchMailApplication {
 				.processor(itemProcessor)
 				.writer(itemWriter)
 				.build();
-	}*/
-
+	}
+/*
 	@Bean
 	public Step connectingStep(){
 		return stepBuilderFactory.get("Step3")
 				.tasklet(new LoginTasklet())
 				.build();
 	}
+*/
 
 	@Bean
 	public Job helloWordJob(){

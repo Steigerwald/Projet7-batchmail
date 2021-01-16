@@ -28,7 +28,7 @@ public class ItemReaderLogin implements ItemReader<String> {
     }
     public void initialize() throws IOException, InterruptedException {
         utilisateur.setMotDePasse("coco");
-        utilisateur.setUserName("user@gmail.com");
+        utilisateur.setUserName("batch@gmail.com");
         nextItemIndex = 0;
     }
 

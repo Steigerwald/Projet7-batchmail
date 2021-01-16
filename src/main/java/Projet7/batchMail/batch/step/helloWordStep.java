@@ -1,6 +1,5 @@
-package Projet7.batchMail.batch;
+package Projet7.batchMail.batch.step;
 
-import Projet7.batchMail.batch.step.helloWordStep;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.ExitStatus;
@@ -10,12 +9,10 @@ import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.stereotype.Component;
 
-@Component
-public class HelloWordTaskLet implements Tasklet, StepExecutionListener {
+public class helloWordStep implements Tasklet, StepExecutionListener {
 
-    private final Logger logger = LoggerFactory.getLogger(HelloWordTaskLet.class);
+    private final Logger logger = LoggerFactory.getLogger(helloWordStep.class);
 
     @Override
     public void beforeStep(StepExecution stepExecution) {
@@ -33,5 +30,6 @@ public class HelloWordTaskLet implements Tasklet, StepExecutionListener {
         logger.info("Custom step ended.");
         return ExitStatus.COMPLETED;
     }
+
 
 }

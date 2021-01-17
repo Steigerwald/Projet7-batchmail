@@ -3,16 +3,19 @@ package Projet7.batchMail.batch.step;
 import Projet7.batchMail.form.LoginForm;
 import Projet7.batchMail.service.AuthService;
 import Projet7.batchMail.service.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
+import lombok.Value;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+@Data
 @Component
+@PropertySource("classpath:application.properties")
 public class ItemReaderLogin implements ItemReader<String> {
 
     @Autowired
@@ -27,6 +30,7 @@ public class ItemReaderLogin implements ItemReader<String> {
     public ItemReaderLogin() throws IOException, InterruptedException {
     }
     public void initialize() throws IOException, InterruptedException {
+
         utilisateur.setMotDePasse("coco");
         utilisateur.setUserName("batch@gmail.com");
         nextItemIndex = 0;

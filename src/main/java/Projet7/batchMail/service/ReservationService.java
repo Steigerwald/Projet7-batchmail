@@ -16,6 +16,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -75,5 +76,29 @@ public class ReservationService {
             return new ArrayList<ReservationDTO>();
         }
     }
+
+    /*Methode pour modifier la reservation du batch (la relance) de la base de données de l'API rest*/
+    public ReservationDTO modifyReservationBatch(ReservationDTO reservation) throws IOException, InterruptedException {
+        reservation.setRelance(true);
+        HttpClient client = HttpClient.newHttpClient();
+        String token = authService.getMemoireToken();
+        var objectMapper = new ObjectMapper();
+        String requestBody = objectMapper
+                .writeValueAsString(reservation);
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9090/reservation/"))
+                .headers("Content-Type", "application/json","Authorization","Bearer"+" "+token)
+                .PUT(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        logger.info(" reponse du body "+response.body());
+        System.out.println(response.body());
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(response.body(), new TypeReference<ReservationDTO>(){});
+    }
+
+
+
+
 
 }

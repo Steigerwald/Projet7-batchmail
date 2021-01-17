@@ -1,6 +1,5 @@
 package Projet7.batchMail.batch;
 
-import Projet7.batchMail.batch.step.CommentTasklet;
 import Projet7.batchMail.batch.step.HelloWordTaskLet;
 import Projet7.batchMail.batch.step.ItemReaderLogin;
 import Projet7.batchMail.dto.ReservationDTO;
@@ -61,12 +60,7 @@ public class JobConfiguration {
     public ItemReader<String> itemReader() throws IOException, InterruptedException {
         return new ItemReaderLogin();
     }
-    /*
-        @Bean
-        public ItemReader<ReservationDTO> reservationDTOItemReader(){
-            return new ItemReaderReservation();
-        }
-    */
+
     @Bean
     public Step helloWordStep(){
         return stepBuilderFactory.get("Step1")
@@ -74,16 +68,10 @@ public class JobConfiguration {
                 .build();
     }
 
-    @Bean
-    public Step commentStep(){
-        return stepBuilderFactory.get("Step2")
-                .tasklet(new CommentTasklet())
-                .build();
-    }
 
     @Bean
     public Step connectingStep(){
-        return stepBuilderFactory.get("Step3")
+        return stepBuilderFactory.get("Step2")
                 .<String,String>chunk(1)
                 .reader(itemReader)
                 .processor(itemProcessor)
@@ -93,7 +81,7 @@ public class JobConfiguration {
 
     @Bean
     public Step reservationStep(){
-        return stepBuilderFactory.get("Step4")
+        return stepBuilderFactory.get("Step3")
                 .<ReservationDTO,ReservationDTO>chunk(1)
                 .reader(reservationDTOItemReader)
                 .processor(itemProcessorReservation)
@@ -103,7 +91,7 @@ public class JobConfiguration {
 
     @Bean
     public Step userStep(){
-        return stepBuilderFactory.get("Step5")
+        return stepBuilderFactory.get("Step4")
                 .<ReservationDTO,ReservationDTO>chunk(3)
                 .reader(userDTOItemReader)
                 .processor(itemProcessorUser)
@@ -111,20 +99,11 @@ public class JobConfiguration {
                 .build();
     }
 
-/*
-	@Bean
-	public Step connectingStep(){
-		return stepBuilderFactory.get("Step3")
-				.tasklet(new LoginTasklet())
-				.build();
-	}
-*/
     @Bean
     public Job helloWordJob(){
         return jobBuilderFactory.get("Job")
                 .start(helloWordStep())
                 .next(connectingStep())
-                .next(commentStep())
                 .next(reservationStep())
                 .next(userStep())
                 .build();

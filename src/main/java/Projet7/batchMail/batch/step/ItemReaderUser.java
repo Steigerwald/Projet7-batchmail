@@ -18,15 +18,16 @@ public class ItemReaderUser implements ItemReader<ReservationDTO> {
 
     @Override
     public ReservationDTO read () throws IOException, InterruptedException {
-        ReservationDTO reservationDTO =reservationService.getItemReservations().get(i);
-        i++;
-        System.out.println(reservationDTO);
-        System.out.println(i);
+
         if (i==reservationService.getItemReservations().size()){
             i=0;
             return null;
-        } else{
-            return reservationDTO;
         }
+        ReservationDTO reservationDTO =reservationService.getItemReservations().get(i);
+        System.out.println(reservationDTO);
+        System.out.println(i);
+
+        i++;
+        return reservationDTO;
     }
 }

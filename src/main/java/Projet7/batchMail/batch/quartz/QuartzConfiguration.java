@@ -27,7 +27,6 @@ public class QuartzConfiguration {
     @Autowired
     private ApplicationContext applicationContext;
 
-
     @Bean
     public JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor(JobRegistry jobRegistry) {
         JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor = new JobRegistryBeanPostProcessor();

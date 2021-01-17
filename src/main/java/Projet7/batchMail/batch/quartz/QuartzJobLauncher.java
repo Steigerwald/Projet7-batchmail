@@ -41,21 +41,10 @@ public class QuartzJobLauncher extends QuartzJobBean {
         try {
             jobLocator = applicationContext.getBean(JobLocator.class);
             jobLauncher = applicationContext.getBean(JobLauncher.class);
-
             JobParameters jobParameters=new JobParametersBuilder()
                     .addLong("time",System.currentTimeMillis())
                     .toJobParameters();
             jobLauncher.run(jobProcessor,jobParameters);
-
-            /*
-            Map<String, Object> jobDataMap = context.getMergedJobDataMap();
-            String jobName = (String) jobDataMap.get("jobName");
-            JobParameters params = new JobParametersBuilder()
-                    .addString("JobID", String.valueOf(System.currentTimeMillis()))
-                    .toJobParameters();
-            Job job = jobLocator.getJob(jobName);
-            JobExecution jobExecution = jobLauncher.run(job, params);
-*/
             //log.info("########### Status: " + jobProcessor.getStatus());
         } catch (Exception e) {
             e.printStackTrace();

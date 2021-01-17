@@ -27,7 +27,6 @@ public class QuartzConfiguration {
     @Autowired
     private ApplicationContext applicationContext;
 
-    Job JOB_NAME;
 
     @Bean
     public JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor(JobRegistry jobRegistry) {
@@ -40,8 +39,8 @@ public class QuartzConfiguration {
     public JobDetailFactoryBean jobDetailFactoryBean() {
         JobDetailFactoryBean jobDetailFactoryBean = new JobDetailFactoryBean();
         jobDetailFactoryBean.setJobClass(QuartzJobLauncher.class);
-        Map<String, Object> map = new HashMap<>();
-        map.put("jobName",JOB_NAME);
+        Map<String, String> map = new HashMap<>();
+        map.put("jobName","job");
         jobDetailFactoryBean.setJobDataAsMap(map);
         return jobDetailFactoryBean;
     }

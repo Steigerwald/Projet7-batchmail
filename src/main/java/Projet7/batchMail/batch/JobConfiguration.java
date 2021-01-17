@@ -12,6 +12,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,20 +23,38 @@ public class JobConfiguration {
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
+
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
+
     @Autowired
     private ItemReader<String> itemReader;
+
+    @Qualifier("itemReaderReservation")
     @Autowired
     private ItemReader<ReservationDTO> reservationDTOItemReader;
+
+    @Qualifier("itemReaderUser")
+    @Autowired
+    private ItemReader<ReservationDTO> userDTOItemReader;
+
     @Autowired
     private ItemProcessor<String,String> itemProcessor;
+
     @Autowired
     private ItemProcessor<ReservationDTO,ReservationDTO> itemProcessorReservation;
+
+    @Autowired
+    private ItemProcessor<ReservationDTO,ReservationDTO> itemProcessorUser;
+
     @Autowired
     private ItemWriter<String> itemWriter;
+
     @Autowired
     private ItemWriter<ReservationDTO> itemWriterReservation;
+
+    @Autowired
+    private ItemWriter<ReservationDTO> itemWriterUser;
 
 
     @Bean
@@ -82,6 +101,16 @@ public class JobConfiguration {
                 .build();
     }
 
+    @Bean
+    public Step userStep(){
+        return stepBuilderFactory.get("Step5")
+                .<ReservationDTO,ReservationDTO>chunk(3)
+                .reader(userDTOItemReader)
+                .processor(itemProcessorUser)
+                .writer(itemWriterUser)
+                .build();
+    }
+
 /*
 	@Bean
 	public Step connectingStep(){
@@ -97,6 +126,7 @@ public class JobConfiguration {
                 .next(connectingStep())
                 .next(commentStep())
                 .next(reservationStep())
+                .next(userStep())
                 .build();
     }
 

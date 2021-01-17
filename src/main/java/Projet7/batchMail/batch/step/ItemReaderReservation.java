@@ -20,11 +20,9 @@ public class ItemReaderReservation implements ItemReader<ReservationDTO> {
     @Autowired
     public AuthService authService;
 
-    List<ReservationDTO> itemReservations = new ArrayList<ReservationDTO>();
-
     @Override
     public ReservationDTO read () throws IOException, InterruptedException {
-        itemReservations.addAll(reservationService.getAllReservationsBatch());
+        reservationService.setItemReservations(reservationService.getAllReservationsBatch());
         return null;
     }
 }

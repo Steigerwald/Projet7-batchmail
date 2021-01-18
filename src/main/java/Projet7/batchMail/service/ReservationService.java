@@ -26,6 +26,7 @@ public class ReservationService {
     Logger logger = (Logger) LoggerFactory.getLogger(ReservationService.class);
 
     private List<ReservationDTO> itemReservations = new ArrayList<ReservationDTO>();
+    private List<ReservationDTO> reservationsRelancees = new ArrayList<ReservationDTO>();
 
     @Autowired
     public AuthService authService;

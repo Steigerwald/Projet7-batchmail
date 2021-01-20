@@ -4,9 +4,9 @@ import Projet7.batchMail.form.LoginForm;
 import Projet7.batchMail.service.AuthService;
 import Projet7.batchMail.service.UserService;
 import lombok.Data;
-import lombok.Value;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +24,12 @@ public class ItemReaderLogin implements ItemReader<String> {
     @Autowired
     public AuthService authService;
 
+    @Value("${foo}")
+    private String motPasse;
+
+    @Value("${mail}")
+    private String mail;
+
     LoginForm utilisateur=new LoginForm();
     int nextItemIndex;
 
@@ -31,8 +37,8 @@ public class ItemReaderLogin implements ItemReader<String> {
     }
     public void initialize() throws IOException, InterruptedException {
 
-        utilisateur.setMotDePasse("coco");
-        utilisateur.setUserName("batch@gmail.com");
+        utilisateur.setMotDePasse(motPasse);
+        utilisateur.setUserName(mail);
         nextItemIndex = 0;
     }
 

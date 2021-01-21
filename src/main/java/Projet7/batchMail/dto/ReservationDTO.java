@@ -1,7 +1,6 @@
 package Projet7.batchMail.dto;
 
 import lombok.Data;
-
 import java.util.Date;
 
 @Data

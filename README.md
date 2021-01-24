@@ -4,11 +4,10 @@ Projet de conception d'un site Bibliothèque, cette application est le batch qui
 
 ## 1. Comment lancer l'application:
 ```
+Lancer d'abord l'application Projet7 selon le README de Projet7-Bibliotheque
+
 git clone https://github.com/Steigerwald/batchMail.git
 cd batchMail
 mvn spring-boot:run
 ```
-## 2. Comment lancer la base de données
-L'application nécessite que l'application du backEnd soit lancée
-- port: 3070
 
